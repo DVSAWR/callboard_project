@@ -10,10 +10,9 @@ def send_user_email(receiver_email):
     email_message = get_simple_formatted_email(
         subject='Feedback',
         receiver_email=receiver_email,
-        text=(f'Регистрация прошла успешно!<br><br>'
-              f'Данные для авторизации<br>'
-              f'Логин: <strong>{receiver_email}</strong><br>'
-              f'Ссылка на сервис <a href="</a>')
+        text=(f'TEXT<br><br>'
+              f'Login: <strong>{receiver_email}</strong><br>'
+              )
     )
     send_email(email_message)
 
