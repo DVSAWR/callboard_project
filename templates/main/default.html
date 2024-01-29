@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>127.0.0.1</title>
+        <!-- Favicon-->
+
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="{% static 'css/admin/admin.css' %}">
+
+        {{ form.media }}
+
+        <style type="text/css">
+
+            body {
+                background-color: white;
+            }
+
+            a {
+            color: black;
+           }
+           a:visited {
+            color: #212121;
+           }
+           a:active {
+            color: #fa0;
+           }
+           a {
+           text-decoration: none;
+           }
+            button {
+                    background: white;
+                    font-size: 17px;
+                    border: none;
+                    padding: 1rem 1.5rem;
+                    margin-bottom: 1rem;
+                    cursor: pointer;
+                   }
+            input[type=submit] {
+                              width: 20%;
+
+                              background-color: white;
+                              border: 1px solid;
+                              color: black;
+                              padding: 16px 32px;
+                              text-decoration: none;
+                              margin: 4px 2px;
+                              cursor: pointer;
+
+                            }
+            input[type=text] {
+                            width: 10%;
+
+            }
+
+        </style>
+
+
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+
+           <div class="container" align="center" >
+               <div align="center">
+                   <img src="https://media0.giphy.com/media/xUA7aQJxHftDbAFMic/giphy.gif?cid=ecf05e47y5y2awhwjskmfvxd9yqetmk2yd32rvrzvzr4bda9&ep=v1_gifs_related&rid=giphy.gif&ct=g" alt="403" width=13%>
+               </div>
+                <a style="font-size: 60px; text-decoration: none; color: black;" class="navbar-brand" href="/callboard">C A L L B O A R D</a>
+               <br>
+               <a style="font-size: 30px; text-decoration: none; color: black;" class="navbar-brand" href="/callboard">s i t e . n a v i g a t i o n</a>
+
+               <div>
+                   <a href="/callboard/create"><button>/create</button></a>
+                   <a href="/callboard/categories"><button>/categories</button></a>
+
+                   {% if not request.user.username %}
+                   <a href="/accounts/login"><button>/login</button></a>
+                   {% endif %}
+
+                   {% if request.user.username %}
+                   <a href="/accounts/logout"><button>/logout</button></a>
+                   {% endif %}
+
+                   {% if request.user.username %}
+                       <a href="/user/{{ request.user.id }}"><button>user/{{ request.user.username }}</button></a>
+                   {% endif %}
+
+                   <a href="{% url 'post_feedback_list' %}"><button>отклики</button></a>
+
+
+                   <button onclick="window.history.back()">back</button>
+                   <a href="/admin"><button>/admin</button></a>
+
+               </div>
+
+
+           </div>
+        </nav>
+        <!-- Page content-->
+        <div class="container">
+            <div class="row">
+               {% block content %}
+               <!--                   {{ flatpage.content }}-->
+               {% endblock content %}
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+
+    <footer>
+        <div align="center" >
+            {% if page_obj.has_other_pages %}
+                <nav>
+                    {% if page_obj.previous_page_number != 1 %}
+                        <a href="?{% url_replace page=1 %}">
+                            1
+                        </a>
+                    {% endif %}
+
+
+                    {% if page_obj.has_previous %}
+                        <a href="?{% url_replace page=page_obj.previous_page_number %}">
+                            {{ page_obj.previous_page_number }}
+                        </a>
+                    {% endif %}
+
+
+                    {{ page_obj.number }}
+
+
+                    {% if page_obj.has_next %}
+                        <a href="?{% url_replace page=page_obj.next_page_number %}">
+                            {{ page_obj.next_page_number }}
+                        </a>
+                    {% endif %}
+
+
+                    {% if page_obj.next_page_number != page_obj.paginator.num_pages%}
+                        <a href="?{% url_replace page=page_obj.paginator.num_pages %}">
+                            {{ page_obj.paginator.num_pages }}
+                        </a>
+                    {% endif %}
+                </nav>
+            {% endif %}
+        </div>
+    </footer>
+</html>

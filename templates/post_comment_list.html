@@ -1,0 +1,46 @@
+{% extends 'main/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+
+{% block content %}
+
+<div align="center">
+
+<form method="get">
+
+    {{ filerset.form.as_p }}
+
+
+    <button type="submit">search</button>
+
+
+    </form>
+
+        <div>
+            {% if post_comment_list %}
+                {% for i in post_comment_list %}
+                    <div style="align=center; width: 60%; border: 1px solid grey">
+
+                            <h3>TITLE: {{ i.author }}</h3>
+                            <p>ID: {{ i.id }}</p>
+                            <p>POST: {{ i.post }}</p>
+                            <p>CREATE_DATETIME: {{ i.create_datetime }}</p>
+                            <p>CONTENT: {{ i.content | safe }}</p>
+                            <p>ACCEPT_STATUS: {{ i.accept_status }}</p>
+                        <a href="{% url 'accept_feedback' i.id %}"><button>принять</button></a>
+                        <a href="{% url 'feedback_delete' i.id %}"><button>удалить</button></a>
+
+                    </div>
+            <br>
+                {% endfor %}
+
+            {% else %}
+                <h2>REQUEST COMMENTS LIST IS EMPTY</h2>
+            {% endif %}
+        </div>
+
+{% endblock content %}
+

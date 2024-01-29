@@ -1,0 +1,32 @@
+{% extends 'main/default.html' %}
+
+{% load custom_filters %}
+
+
+{% block title %}
+USER DETAIL
+{% endblock title %}
+
+
+{% block content %}
+
+{{ form.as_p }}
+
+<div align="center">
+    <h1>USERNAME: {{ user_detail.username }}</h1>
+    <p>ID: {{ user_detail.id }}</p>
+    <p>email: {{ user_detail.email }}</p>
+    <p>first_name: {{ user_detail.first_name }}</p>
+    <p>last_name: {{ user_detail.last_name }}</p>
+<!--    <p>{{ request.user.groups.values }}</p>-->
+</div>
+
+<div align="center">
+    <a href="./{{ user_detail.id }}/update"><button>/update</button></a>
+</div>
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends 'main/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+
+{% block content %}
+
+<div align="center">
+
+<form method="get">
+
+    {{ filerset.form.as_p }}
+
+
+    <button type="submit">search</button>
+
+
+    </form>
+
+        <div>
+            {% if request_post_list %}
+                {% for i in request_post_list %}
+                    <div style="align=center; width: 60%; border: 1px solid grey">
+                        <a href="/callboard/{{ i.id }}">
+                            <h3>TITLE: {{ i.title }}</h3>
+                            <p>ID: {{ i.id }}</p>
+                            <p>AUTHOR: {{ i.author }}</p>
+                            <p>CREATE_DATETIME: {{ i.create_datetime }}</p>
+                            <p>CATEGORIE: {{ i.category }}</p>
+                            <p>CONTENT: {{ i.content | safe }}</p>
+                        </a>
+                    </div>
+            <br>
+                {% endfor %}
+
+            {% else %}
+                <h2>REQUEST POST LIST IS EMPTY</h2>
+            {% endif %}
+        </div>
+
+{% endblock content %}
+

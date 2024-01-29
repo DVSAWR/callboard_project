@@ -1,0 +1,26 @@
+{% extends 'main/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+{% block content %}
+    <br>
+    <h2>CATEGORY LIST</h2>
+    <br>
+
+    <div>
+        {% if category_list %}
+            {% for i in category_list %}
+                <div align="left">
+                        <p>NAME: {{ i.name }}</p>
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <h2>REQUEST POST LIST IS EMPTY</h2>
+        {% endif %}
+    </div>
+
+
+{% endblock content %}

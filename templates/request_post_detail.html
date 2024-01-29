@@ -1,0 +1,47 @@
+{% extends 'main/default.html' %}
+
+{% load custom_filters %}
+
+
+{% block title %}
+REQUEST POST DETAIL
+{% endblock title %}
+
+
+{% block content %}
+
+
+
+<div align="center">
+    <h2>{{ request_post_detail.title }}</h2>
+    <p>{{ request_post_detail.content | safe }}</p>
+    <p>{{ request_post_detail.create_datetime|date:'d-m-Y' }}</p>
+</div>
+
+<div align="center">
+   <a href="{% url 'request_post_update' request_post_detail.id %}"><button>/update</button></a>
+   <a href="{% url 'request_post_delete' request_post_detail.id %}"><button>/delete</button></a>
+    <a href="{% url 'feedback_create' request_post_detail.id %}"><button>откликнуться</button></a>
+</div>
+
+<div>
+    {% if not request_post_detail.comments.all %}
+        no comments
+
+    {% else %}
+
+        {% for comment in request_post_detail.comments.all %}
+            <div>
+                <h3>author: {{ comment.author }}</h3>
+                <p>create_datetime: {{ comment.create_datetime }}</p>
+                <p>content: {{ comment.content }}</p>
+                <p>accept_status: {{ comment.accept_status }}</p>
+            </div>
+        {% endfor %}
+
+    {% endif %}
+</div>
+
+
+
+{% endblock content %}
